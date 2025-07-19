@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Javalin</title>
+</head>
+<body>
+<h1>Quiz sobre Javalin</h1>
+<p>Selecione as 2 afirmações falsas e clique em "Verificar".</p>
+<form id="quizForm">
+  <label><input type="checkbox" name="q" value="1"> Javalin é um framework leve para Java e Kotlin.</label><br>
+  <label><input type="checkbox" name="q" value="2"> O Javalin precisa obrigatoriamente de um servidor Tomcat instalado.</label><br>
+  <label><input type="checkbox" name="q" value="3"> Ele usa Jetty embarcado por padrão.</label><br>
+  <label><input type="checkbox" name="q" value="4"> Permite criar rotas GET, POST, PUT e DELETE.</label><br>
+  <label><input type="checkbox" name="q" value="5"> Não suporta WebSockets.</label><br>
+  <label><input type="checkbox" name="q" value="6"> É ideal para microsserviços e APIs pequenas.</label><br>
+  <label><input type="checkbox" name="q" value="7"> Possui integração simples com JSON.</label><br>
+  <label><input type="checkbox" name="q" value="8"> Tem curva de aprendizado baixa.</label><br>
+  <label><input type="checkbox" name="q" value="9"> Pode ser usado com Kotlin além de Java.</label><br>
+  <label><input type="checkbox" name="q" value="10"> A comunidade é menor que a do Spring Boot.</label><br><br>
+  <button type="button" onclick="verificar()">Verificar</button>
+</form>
+
+<p id="resultado"></p>
+
+<script>
+  function verificar() {
+    const corretas = ["2", "5"];
+    const selecionadas = Array.from(document.querySelectorAll('input[name="q"]:checked')).map(c => c.value);
+
+    if (selecionadas.length !== 2) {
+      document.getElementById('resultado').textContent = '⚠️ Selecione exatamente 2 opções.';
+      return;
+    }
+
+    selecionadas.sort();
+    corretas.sort();
+
+    if (JSON.stringify(selecionadas) === JSON.stringify(corretas)) {
+      document.getElementById('resultado').textContent = '✅ Parabéns! Você acertou as 2 informações falsas!';
+    } else {
+      document.getElementById('resultado').textContent = '❌ Resposta incorreta. As falsas são: 2 e 5.';
+    }
+  }
+</script>
+</body>
+</html>
